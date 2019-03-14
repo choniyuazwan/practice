@@ -5,4 +5,5 @@ import java.util.List;
 public interface IBuku {
 	void tambahData(Buku buku);
 	List<Buku> getListBuku();
+	void detailData(String id);
 }

@@ -1,7 +1,5 @@
 package com.practice.tugas;
 
-import com.pratice2.main.Mahasiswa2;
-
 public class Main {
 
 	public static void main(String[] args) {
@@ -52,6 +50,8 @@ public class Main {
 			// next row number
 			i += 1;
 		}
+		
+		bukuService.detailData("b002");
 	}
 	
 	public static String padRight(String inputString, int length) {
