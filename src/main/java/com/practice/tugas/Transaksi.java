@@ -1,8 +1,8 @@
 package com.practice.tugas;
 
 public class Transaksi {
-	String id, judul;
-	int jumlah, harga;
+	private String id, judul;
+	private int jumlah, harga;
 	public String getId() {
 		return id;
 	}

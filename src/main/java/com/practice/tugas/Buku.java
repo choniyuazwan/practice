@@ -9,10 +9,10 @@ public class Buku {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getNama() {
+	public String getJudul() {
 		return judul;
 	}
-	public void setNama(String nama) {
+	public void setJudul(String nama) {
 		this.judul = nama;
 	}
 	public String getPenulis() {
