@@ -7,6 +7,7 @@ public interface IMahasiswa2 {
 	
 	String getGrade(double average);
 	
+	
 	void tambahData(Mahasiswa2 siswa);
 	
 	List<Mahasiswa2> getListMahasiswa();

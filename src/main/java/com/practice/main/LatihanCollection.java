@@ -7,7 +7,7 @@ public class LatihanCollection {
 	
 	static int[] no = new int[5];
 	static List<Mahasiswa> listSiswa = new ArrayList<>();
-	Mahasiswa[] lstSiswa = new Mahasiswa[2];
+//	Mahasiswa[] lstSiswa = new Mahasiswa[2];
 	
 	public static void main(String[] args) {
 		no[0] = 1;

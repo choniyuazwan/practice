@@ -4,6 +4,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		IBuku bukuService = new BukuImpl();
+		ITransaksi transaksiService = new TransaksiImpl();
 		
 		Buku buku1 = new Buku();
 		buku1.setId("b001");
@@ -38,7 +39,7 @@ public class Main {
 		
 		// Initiate Number of Row
 		int i = 1;
-		
+
 		for (Buku buku : bukuService.getListBuku()) {
 
 			// print data mahasiswa
@@ -52,11 +53,23 @@ public class Main {
 		}
 		
 		bukuService.detailData("b002");
+		transaksiService.beliData("b001");
+		
+		
+		i = 1;
+		
+		for (Transaksi transaksi : transaksiService.getListTransaksi()) {
+
+			// print data mahasiswa
+			System.out.println("|" + padRight("" + i, 3) + "| " + padRight(transaksi.getJudul(), 8) + "| ");
+			// next row number
+			i += 1;
+		}
+
 	}
 	
 	public static String padRight(String inputString, int length) {
 		return String.format("%1$-" + length + "s", inputString);
 
 	}
-
 }
