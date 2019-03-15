@@ -37,16 +37,19 @@ public class Main {
 		buku3.setStok(10);
 		bukuService.tambahData(buku3);
 		
+		
+		
+		System.out.println("Data Buku yang Awal");
 		// Print Header Table
-		System.out.println("| " + padRight("Id", 3) + "| " + padRight("Judul", 8) + "| " + padRight("Penulis", 20) 
-		+ "| " + padRight("Penerbit", 3) + "|" + padRight("Harga", 3) + "|" + padRight("Stok", 3) + "|");
+		System.out.println("| " + padRight("No", 5) + "| " + padRight("Id", 8) + "| " + padRight("Judul", 20) + "|" + padRight("Penulis", 20) 
+		+ "|" + padRight("Penerbit", 20) + "|" + padRight("Harga", 10) + "|" + padRight("Stok", 5) + "|");
 		
 		// Initiate Number of Row
 		int i = 1;
 
 //		print data buku
 		for (Buku buku : bukuService.getListBuku()) {
-			System.out.println("|" + padRight("" + i, 3) + "| " + padRight(buku.getId(), 8) + "| "
+			System.out.println("| " + padRight("" + i, 5) + "| " + padRight(buku.getId(), 8) + "| "
 					+ padRight(buku.getJudul(), 20) + "|" + padRight("" + buku.getPenulis(), 20) + "|" 
 					+ padRight("" + buku.getPenerbit(), 20) + "|" + padRight("" + buku.getHarga(), 10) + "|"
 					+ padRight("" + buku.getStok(), 5) + "|");
@@ -55,63 +58,67 @@ public class Main {
 			i += 1;
 		}
 		
+		
+		
+		
 //		lihat detail data buku
 		bukuService.detailData("b002");
 
-//		menambah data transaksi
 		
-//		String[][] barang = {{"b001","3"},{"b002","4"}};
-//		
-//		for(i=0; i<barang.length; i++) {
-//			
-//		}
-	
-		i = 0;
-		boolean found = false;
-		for (Buku buku : bukuService.getListBuku()) {			
-			if (buku.getId() == "b002") {
-				found = true;
-				break;
-			}	
-			i += 1;
+		
+		
+//		menambah data transaksi	dan update stok
+		String[][] barang = {{"b003","3"},{"b001","4"}};
+		
+		int stokBaru=0;
+		for(int x=0; x<barang.length; x++) {
+			i = 0;
+			boolean found = false;
+			for (Buku buku : bukuService.getListBuku()) {			
+				if (buku.getId() == barang[x][0]) {
+					found = true;
+					break;
+				}	
+				i += 1;
+			}		
+			if (found){
+				Transaksi transaksi = new Transaksi();
+				transaksi.setId(bukuService.getListBuku().get(i).getId());
+				transaksi.setJudul(bukuService.getListBuku().get(i).getJudul());
+				transaksi.setJumlah(Integer.parseInt(barang[x][1]));
+				transaksi.setHarga(bukuService.getListBuku().get(i).getHarga());
+				transaksiService.tambahData(transaksi);
+				stokBaru = bukuService.getListBuku().get(i).getStok()-transaksi.getJumlah();
+				bukuService.getListBuku().get(i).setStok(stokBaru);
+			} else {
+				System.out.println("\nkoding transaksi masih salah");
+			}
 		}
 		
-		if (found){
-			System.out.println("\nData Transaksi");
-			Transaksi transaksi = new Transaksi();
-			transaksi.setId(bukuService.getListBuku().get(i).getId());
-			transaksi.setJudul(bukuService.getListBuku().get(i).getJudul());
-			transaksi.setJumlah(1);
-			transaksi.setHarga(bukuService.getListBuku().get(i).getHarga());
-			transaksiService.tambahData(transaksi);
-		} else {
-			System.out.println("\nkoding transaksi masih salah");
-		}
+		
+		
 		
 //		menampilkan data transaksi
-		i = 0;
+		i = 1;
+		int totalHarga = 0;
+		System.out.println("\nData Transaksi");
 		for (Transaksi transaksi : transaksiService.getListTransaksi()) {
 
 			// print data mahasiswa
 			System.out.println("|" + padRight("" + i, 3) + "| " + padRight(transaksi.getId(), 8) + "| "
-					+ padRight("" + transaksi.getJudul(), 3) + "| " + padRight(""+transaksi.getJumlah(), 8) + "| "
+					+ padRight("" + transaksi.getJudul(), 20) + "| " + padRight(""+transaksi.getJumlah(), 8) + "| "
 					+ padRight("" + transaksi.getHarga(), 3) + "| ");
+			totalHarga += transaksi.getHarga();
+			// next row number
+			i += 1;
+		}
+		
+		System.out.println("Total Harga : " + padRight("" + totalHarga, 20));
 
-			// next row number
-			i += 1;
-		}
 		
-//		update data stok buku
-		int stokBaru;
-		i = 0;
-		for (Transaksi transaksi : transaksiService.getListTransaksi()) {
-			stokBaru = bukuService.getListBuku().get(i).getStok()-transaksi.getJumlah();
-			bukuService.getListBuku().get(i).setStok(stokBaru);
-			// next row number
-			i += 1;
-		}
 		
-//		print data buku
+//		print data buku yang baru
+		i = 1;
 		System.out.println("\nData buku yang baru");
 		for (Buku buku : bukuService.getListBuku()) {
 			System.out.println("|" + padRight("" + i, 3) + "| " + padRight(buku.getId(), 8) + "| "
@@ -122,6 +129,8 @@ public class Main {
 			// next row number
 			i += 1;
 		}
+		
+//		transaksiService.beliData("b003");
 
 	}
 	

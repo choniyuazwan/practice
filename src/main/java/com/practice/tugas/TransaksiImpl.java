@@ -5,6 +5,7 @@ import java.util.List;
 
 public class TransaksiImpl implements ITransaksi {
 	private List<Transaksi> listTransaksi = new ArrayList<>();
+//	private List<Buku> listBuku = new ArrayList<>();
 //	IBuku bukuService = new BukuImpl();
 	
 	@Override

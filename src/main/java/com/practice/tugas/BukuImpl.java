@@ -30,7 +30,7 @@ public class BukuImpl implements IBuku {
 		}
 		
 		if (found){
-			System.out.println();
+			System.out.println("\nDetail Buku");
 			System.out.println("| " + padRight("Id", 15) + ": " + padRight(listBuku.get(i).id, 15) + "|");
 			System.out.println("| " + padRight("Judul", 15) + ": " + padRight(listBuku.get(i).judul, 15) + "|");
 			System.out.println("| " + padRight("Penulis", 15) + ": " + padRight(listBuku.get(i).penulis, 15) + "|");
